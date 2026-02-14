@@ -1,0 +1,150 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../constants/app_routes.dart';
+import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/entrepreneur/presentation/pages/entrepreneur_form_page.dart';
+import '../../features/entrepreneur/presentation/pages/entrepreneur_list_page.dart';
+import '../../features/investor/presentation/pages/investor_directory_page.dart';
+import '../../features/investor/presentation/pages/investment_summary_page.dart';
+import '../../features/investor/presentation/pages/investor_detail_page.dart';
+import '../../features/real_estate/presentation/pages/real_estate_map_page.dart';
+import '../../features/real_estate/presentation/pages/project_detail_page.dart';
+import '../../features/real_estate/presentation/pages/crowdfunding_page.dart';
+import '../../features/real_estate/presentation/pages/property_valuation_page.dart';
+import '../../features/real_estate/presentation/pages/experts_directory_page.dart';
+import '../../features/legal_finance/presentation/pages/legal_consultations_page.dart';
+import '../../features/legal_finance/presentation/pages/expert_profile_page.dart';
+import '../../features/legal_finance/presentation/pages/banking_hub_page.dart';
+import '../../features/legal_finance/presentation/pages/funding_application_page.dart';
+import '../../features/legal_finance/presentation/pages/status_tracker_page.dart';
+import '../../features/shell/presentation/pages/shell_page.dart';
+
+class AppRouter {
+  AppRouter._();
+
+  static final GlobalKey<NavigatorState> _rootNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'root');
+  static final GlobalKey<NavigatorState> _shellNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'shell');
+
+  static final GoRouter router = GoRouter(
+    navigatorKey: _rootNavigatorKey,
+    initialLocation: AppRoutes.home,
+    routes: [
+      ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (context, state, child) => ShellPage(child: child),
+        routes: [
+          GoRoute(
+            path: AppRoutes.home,
+            name: AppRoutes.homeName,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: HomePage()),
+          ),
+          GoRoute(
+            path: AppRoutes.entrepreneur,
+            name: AppRoutes.entrepreneurName,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: EntrepreneurListPage()),
+            routes: [
+              GoRoute(
+                path: AppRoutes.newSub,
+                name: AppRoutes.entrepreneurNewName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const EntrepreneurFormPage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.investor,
+            name: AppRoutes.investorName,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: InvestorDirectoryPage()),
+            routes: [
+              GoRoute(
+                path: AppRoutes.summarySub,
+                name: AppRoutes.investmentSummaryName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const InvestmentSummaryPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.idSub,
+                name: AppRoutes.investorDetailName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) =>
+                    InvestorDetailPage(investorId: state.pathParameters['id']!),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.realEstate,
+            name: AppRoutes.realEstateName,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: RealEstateMapPage()),
+            routes: [
+              GoRoute(
+                path: AppRoutes.projectIdSub,
+                name: AppRoutes.projectDetailName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) =>
+                    ProjectDetailPage(projectId: state.pathParameters['id']!),
+              ),
+              GoRoute(
+                path: AppRoutes.crowdfundingSub,
+                name: AppRoutes.crowdfundingName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const CrowdfundingPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.valuationSub,
+                name: AppRoutes.propertyValuationName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const PropertyValuationPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.expertsSub,
+                name: AppRoutes.realEstateExpertsName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const ExpertsDirectoryPage(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.legalFinance,
+            name: AppRoutes.legalFinanceName,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: LegalConsultationsPage()),
+            routes: [
+              GoRoute(
+                path: AppRoutes.expertIdSub,
+                name: AppRoutes.expertProfileName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) =>
+                    ExpertProfilePage(expertId: state.pathParameters['id']!),
+              ),
+              GoRoute(
+                path: AppRoutes.bankingSub,
+                name: AppRoutes.bankingHubName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const BankingHubPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.applyFundingSub,
+                name: AppRoutes.applyFundingName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const FundingApplicationPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.statusTrackerSub,
+                name: AppRoutes.statusTrackerName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const StatusTrackerPage(),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
+}
