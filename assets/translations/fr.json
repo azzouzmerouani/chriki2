@@ -126,5 +126,13 @@
 
   "expert_tariq_name": "Arch. Tariq Mansour",
   "expert_tariq_spec": "Conception architecturale",
-  "expert_tariq_bio": "Architecte primé spécialisé dans les bâtiments commerciaux durables en Algérie."
+  "expert_tariq_bio": "Architecte primé spécialisé dans les bâtiments commerciaux durables en Algérie.",
+
+  "onboarding_title_1": "Partagez votre idée",
+  "onboarding_desc_1": "Transformez vos idées en projets concrets. Créez votre profil entrepreneur et connectez-vous aux bons investisseurs.",
+  "onboarding_title_2": "Investissez intelligemment",
+  "onboarding_desc_2": "Découvrez des opportunités d'investissement variées, suivez votre portefeuille et participez au financement participatif facilement.",
+  "onboarding_title_3": "Immobilier & Conseil",
+  "onboarding_desc_3": "Explorez les projets immobiliers en Algérie, évaluez vos propriétés et obtenez des consultations juridiques et financières.",
+  "onboarding_skip": "Passer"
 }

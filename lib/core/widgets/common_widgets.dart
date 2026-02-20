@@ -100,6 +100,7 @@ class SherikiButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.primary,
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
         ),
         child: _buildChild(textColor ?? AppColors.textOnPrimary),
       ),

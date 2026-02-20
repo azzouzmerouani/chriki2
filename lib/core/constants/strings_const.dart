@@ -158,4 +158,13 @@ class StringsConst {
   static const String smartAlerts = 'smart_alerts';
   static const String newMatch = 'new_match';
   static const String matchDescription = 'match_description';
+
+  // ── Onboarding ────────────────────────────────────────
+  static const String onboardingTitle1 = 'onboarding_title_1';
+  static const String onboardingDesc1 = 'onboarding_desc_1';
+  static const String onboardingTitle2 = 'onboarding_title_2';
+  static const String onboardingDesc2 = 'onboarding_desc_2';
+  static const String onboardingTitle3 = 'onboarding_title_3';
+  static const String onboardingDesc3 = 'onboarding_desc_3';
+  static const String onboardingSkip = 'onboarding_skip';
 }

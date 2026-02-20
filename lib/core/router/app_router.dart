@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/app_routes.dart';
 import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/onboarding/logic/cubit/onboarding_cubit.dart';
+import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/entrepreneur/presentation/pages/entrepreneur_form_page.dart';
 import '../../features/entrepreneur/presentation/pages/entrepreneur_list_page.dart';
 import '../../features/investor/presentation/pages/investor_directory_page.dart';
@@ -23,15 +27,52 @@ import '../../features/shell/presentation/pages/shell_page.dart';
 class AppRouter {
   AppRouter._();
 
+  static bool? _onboardingCompleted;
+
   static final GlobalKey<NavigatorState> _rootNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'root');
   static final GlobalKey<NavigatorState> _shellNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'shell');
 
+  /// Redirects to onboarding if the user hasn't completed it yet.
+  static Future<String?> _guardOnboarding(
+    BuildContext context,
+    GoRouterState state,
+  ) async {
+    _onboardingCompleted ??= (await SharedPreferences.getInstance()).getBool(
+      'onboarding_completed',
+    );
+
+    final isCompleted = _onboardingCompleted ?? false;
+    final isGoingToOnboarding = state.matchedLocation == AppRoutes.onboarding;
+
+    if (!isCompleted && !isGoingToOnboarding) {
+      return AppRoutes.onboarding;
+    }
+    if (isCompleted && isGoingToOnboarding) {
+      return AppRoutes.home;
+    }
+    return null;
+  }
+
+  /// Call this when onboarding finishes so the guard updates.
+  static void markOnboardingCompleted() {
+    _onboardingCompleted = true;
+  }
+
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: AppRoutes.home,
+    redirect: _guardOnboarding,
     routes: [
+      GoRoute(
+        path: AppRoutes.onboarding,
+        name: AppRoutes.onboardingName,
+        builder: (context, state) => BlocProvider(
+          create: (_) => OnboardingCubit()..checkOnboardingStatus(),
+          child: const OnboardingPage(),
+        ),
+      ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
         builder: (context, state, child) => ShellPage(child: child),
