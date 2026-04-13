@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/common_widgets.dart';
@@ -41,11 +42,11 @@ class _StatusTrackerView extends StatelessWidget {
   String _statusLabel(ApplicationStatus status) {
     switch (status) {
       case ApplicationStatus.pending:
-        return 'pending'.tr();
+        return StringsConst.pending.tr();
       case ApplicationStatus.approved:
-        return 'approved'.tr();
+        return StringsConst.approved.tr();
       case ApplicationStatus.rejected:
-        return 'rejected'.tr();
+        return StringsConst.rejected.tr();
     }
   }
 
@@ -63,13 +64,13 @@ class _StatusTrackerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('status_tracker'.tr())),
+      appBar: AppBar(title: Text(StringsConst.statusTracker.tr())),
       body: BlocBuilder<LegalFinanceCubit, LegalFinanceState>(
         builder: (context, state) {
           if (state is FundingApplicationsLoaded) {
             if (state.applications.isEmpty) {
               return SherikiEmptyState(
-                message: 'no_data'.tr(),
+                message: StringsConst.noData.tr(),
                 icon: Iconsax.status,
               );
             }
@@ -130,10 +131,13 @@ class _ApplicationCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(application.bankName, style: AppTextStyles.labelLarge),
+                    Text(
+                      application.bankName.tr(),
+                      style: AppTextStyles.labelLarge,
+                    ),
                     SizedBox(height: 2.h),
                     Text(
-                      'Applied: ${_formatDate(application.appliedAt)}',
+                      '${StringsConst.appliedAtLabel.tr()}: ${_formatDate(application.appliedAt)}',
                       style: AppTextStyles.caption,
                     ),
                   ],
@@ -146,14 +150,20 @@ class _ApplicationCard extends StatelessWidget {
 
           // Details
           _DetailRow(
-            label: 'Amount',
+            label: StringsConst.amountLabel.tr(),
             value: '${application.amount.toStringAsFixed(0)} DZD',
           ),
           SizedBox(height: 4.h),
-          _DetailRow(label: 'Purpose', value: application.purpose),
+          _DetailRow(
+            label: StringsConst.purposeLabel.tr(),
+            value: application.purpose.tr(),
+          ),
           if (application.notes != null) ...[
             SizedBox(height: 4.h),
-            _DetailRow(label: 'Notes', value: application.notes!),
+            _DetailRow(
+              label: StringsConst.notesLabel.tr(),
+              value: application.notes!.tr(),
+            ),
           ],
 
           SizedBox(height: 12.h),
@@ -200,10 +210,14 @@ class _StatusTimeline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _TimelineNode(label: 'Submitted', isActive: true, isCompleted: true),
+        _TimelineNode(
+          label: StringsConst.submittedLabel.tr(),
+          isActive: true,
+          isCompleted: true,
+        ),
         _TimelineConnector(isActive: status != ApplicationStatus.pending),
         _TimelineNode(
-          label: 'Under Review',
+          label: StringsConst.underReviewLabel.tr(),
           isActive: true,
           isCompleted: status != ApplicationStatus.pending,
         ),
@@ -214,8 +228,8 @@ class _StatusTimeline extends StatelessWidget {
         ),
         _TimelineNode(
           label: status == ApplicationStatus.rejected
-              ? 'rejected'.tr()
-              : 'approved'.tr(),
+              ? StringsConst.rejected.tr()
+              : StringsConst.approved.tr(),
           isActive:
               status == ApplicationStatus.approved ||
               status == ApplicationStatus.rejected,

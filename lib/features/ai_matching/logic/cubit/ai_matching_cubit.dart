@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../data/models/smart_alert_model.dart';
 import 'ai_matching_state.dart';
 
@@ -84,27 +85,27 @@ class AiMatchingCubit extends Cubit<AiMatchingState> {
       SmartAlert(
         id: 'sa1',
         investorId: 'inv1',
-        investorName: 'Abdullah Investment Group',
+        investorName: StringsConst.smartAlertInvestor1,
         projectId: '1',
-        projectTitle: 'Smart Irrigation System',
+        projectTitle: StringsConst.smartAlertProject1,
         sector: 'Agriculture',
         matchedAt: DateTime.now().subtract(const Duration(hours: 2)),
       ),
       SmartAlert(
         id: 'sa2',
         investorId: 'inv5',
-        investorName: 'Digital Bridge Capital',
+        investorName: StringsConst.smartAlertInvestor2,
         projectId: '3',
-        projectTitle: 'Green Delivery Fleet',
+        projectTitle: StringsConst.smartAlertProject2,
         sector: 'Technology',
         matchedAt: DateTime.now().subtract(const Duration(hours: 5)),
       ),
       SmartAlert(
         id: 'sa3',
         investorId: 'inv3',
-        investorName: 'Noor Ventures',
+        investorName: StringsConst.smartAlertInvestor3,
         projectId: '2',
-        projectTitle: 'EduConnect Platform',
+        projectTitle: StringsConst.smartAlertProject3,
         sector: 'Education',
         matchedAt: DateTime.now().subtract(const Duration(days: 1)),
         isRead: true,
@@ -112,9 +113,9 @@ class AiMatchingCubit extends Cubit<AiMatchingState> {
       SmartAlert(
         id: 'sa4',
         investorId: 'inv2',
-        investorName: 'Gulf Capital Partners',
+        investorName: StringsConst.smartAlertInvestor4,
         projectId: 're1',
-        projectTitle: 'Al Murjan Residence',
+        projectTitle: StringsConst.smartAlertProject4,
         sector: 'Real Estate',
         matchedAt: DateTime.now().subtract(const Duration(days: 2)),
         isRead: true,
@@ -122,9 +123,9 @@ class AiMatchingCubit extends Cubit<AiMatchingState> {
       SmartAlert(
         id: 'sa5',
         investorId: 'inv4',
-        investorName: 'Sahara Fund',
+        investorName: StringsConst.smartAlertInvestor5,
         projectId: '4',
-        projectTitle: 'HealthTrack App',
+        projectTitle: StringsConst.smartAlertProject5,
         sector: 'Healthcare',
         matchedAt: DateTime.now().subtract(const Duration(days: 3)),
       ),

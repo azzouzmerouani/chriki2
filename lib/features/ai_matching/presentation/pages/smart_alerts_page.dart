@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/common_widgets.dart';
@@ -29,7 +30,7 @@ class _SmartAlertsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('smart_alerts'.tr()),
+        title: Text(StringsConst.smartAlerts.tr()),
         actions: [
           BlocBuilder<AiMatchingCubit, AiMatchingState>(
             builder: (context, state) {
@@ -43,7 +44,7 @@ class _SmartAlertsView extends StatelessWidget {
                     size: 18.sp,
                   ),
                   label: Text(
-                    'Read All',
+                    StringsConst.readAll.tr(),
                     style: AppTextStyles.labelSmall.copyWith(
                       color: AppColors.textOnPrimary,
                     ),
@@ -63,7 +64,7 @@ class _SmartAlertsView extends StatelessWidget {
           if (state is AiMatchingLoaded) {
             if (state.alerts.isEmpty) {
               return SherikiEmptyState(
-                message: 'no_data'.tr(),
+                message: StringsConst.noData.tr(),
                 icon: Iconsax.notification_bing,
               );
             }
@@ -79,7 +80,7 @@ class _SmartAlertsView extends StatelessWidget {
                     ),
                     color: AppColors.primary.withValues(alpha: 0.08),
                     child: Text(
-                      '${state.unreadCount} new matches',
+                      '${state.unreadCount} ${StringsConst.newMatchesCount.tr()}',
                       style: AppTextStyles.labelMedium.copyWith(
                         color: AppColors.primary,
                       ),
@@ -189,7 +190,7 @@ class _AlertCard extends StatelessWidget {
                       ),
                     Expanded(
                       child: Text(
-                        'new_match'.tr(),
+                        StringsConst.newMatch.tr(),
                         style: AppTextStyles.labelLarge,
                       ),
                     ),
@@ -201,7 +202,9 @@ class _AlertCard extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'match_description'.tr(namedArgs: {'sector': alert.sector}),
+                  StringsConst.matchDescription.tr(
+                    namedArgs: {'sector': _sectorLabel(alert.sector)},
+                  ),
                   style: AppTextStyles.bodySmall,
                 ),
                 SizedBox(height: 8.h),
@@ -215,7 +218,7 @@ class _AlertCard extends StatelessWidget {
                     SizedBox(width: 4.w),
                     Expanded(
                       child: Text(
-                        alert.projectTitle,
+                        alert.projectTitle.tr(),
                         style: AppTextStyles.labelSmall.copyWith(
                           color: AppColors.primary,
                         ),
@@ -228,7 +231,7 @@ class _AlertCard extends StatelessWidget {
                   children: [
                     Icon(Iconsax.user, size: 14.sp, color: AppColors.textHint),
                     SizedBox(width: 4.w),
-                    Text(alert.investorName, style: AppTextStyles.caption),
+                    Text(alert.investorName.tr(), style: AppTextStyles.caption),
                   ],
                 ),
               ],
@@ -241,8 +244,29 @@ class _AlertCard extends StatelessWidget {
 
   String _timeAgo(DateTime date) {
     final diff = DateTime.now().difference(date);
-    if (diff.inMinutes < 60) return '${diff.inMinutes}m ago';
-    if (diff.inHours < 24) return '${diff.inHours}h ago';
-    return '${diff.inDays}d ago';
+    if (diff.inMinutes < 60) {
+      return '${diff.inMinutes} ${StringsConst.minuteAgo.tr()}';
+    }
+    if (diff.inHours < 24) {
+      return '${diff.inHours} ${StringsConst.hourAgo.tr()}';
+    }
+    return '${diff.inDays} ${StringsConst.dayAgo.tr()}';
+  }
+
+  String _sectorLabel(String sector) {
+    switch (sector.toLowerCase()) {
+      case 'technology':
+        return StringsConst.technology.tr();
+      case 'agriculture':
+        return StringsConst.agriculture.tr();
+      case 'real estate':
+        return StringsConst.realEstate.tr();
+      case 'healthcare':
+        return StringsConst.healthcare.tr();
+      case 'education':
+        return StringsConst.education.tr();
+      default:
+        return sector;
+    }
   }
 }

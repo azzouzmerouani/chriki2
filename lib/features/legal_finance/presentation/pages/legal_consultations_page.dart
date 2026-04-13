@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/common_widgets.dart';
@@ -29,7 +30,7 @@ class _LegalConsultationsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('legal_consultations'.tr()),
+        title: Text(StringsConst.legalConsultations.tr()),
         actions: [
           IconButton(
             icon: const Icon(Iconsax.bank),
@@ -65,7 +66,7 @@ class _LegalConsultationsView extends StatelessWidget {
                               alpha: 0.1,
                             ),
                             child: Text(
-                              expert.name.substring(5, 6),
+                              expert.name.tr().substring(0, 1),
                               style: AppTextStyles.h3.copyWith(
                                 color: AppColors.primary,
                               ),
@@ -77,12 +78,12 @@ class _LegalConsultationsView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  expert.name,
+                                  expert.name.tr(),
                                   style: AppTextStyles.labelLarge,
                                 ),
                                 SizedBox(height: 2.h),
                                 Text(
-                                  expert.specialization,
+                                  expert.specialization.tr(),
                                   style: AppTextStyles.bodySmall,
                                 ),
                                 SizedBox(height: 4.h),
@@ -112,7 +113,7 @@ class _LegalConsultationsView extends StatelessWidget {
                       ),
                       SizedBox(height: 12.h),
                       Text(
-                        expert.bio,
+                        expert.bio.tr(),
                         style: AppTextStyles.bodySmall,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -121,14 +122,14 @@ class _LegalConsultationsView extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '${expert.consultationFee.toStringAsFixed(0)} DZD/session',
+                            '${expert.consultationFee.toStringAsFixed(0)} ${StringsConst.dzdSession.tr()}',
                             style: AppTextStyles.labelMedium.copyWith(
                               color: AppColors.primary,
                             ),
                           ),
                           const Spacer(),
                           SherikiButton(
-                            text: 'book_consultation'.tr(),
+                            text: StringsConst.bookConsultation.tr(),
                             width: 150.w,
                             onPressed: () => context.go(
                               '/legal-finance/expert/${expert.id}',

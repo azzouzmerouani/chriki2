@@ -12,6 +12,9 @@ import '../../features/entrepreneur/presentation/pages/entrepreneur_list_page.da
 import '../../features/investor/presentation/pages/investor_directory_page.dart';
 import '../../features/investor/presentation/pages/investment_summary_page.dart';
 import '../../features/investor/presentation/pages/investor_detail_page.dart';
+import '../../features/investor/presentation/pages/university_idea_nda_page.dart';
+import '../../features/investor/presentation/pages/university_idea_chat_page.dart';
+import '../../features/investor/presentation/pages/university_ideas_page.dart';
 import '../../features/real_estate/presentation/pages/real_estate_map_page.dart';
 import '../../features/real_estate/presentation/pages/project_detail_page.dart';
 import '../../features/real_estate/presentation/pages/crowdfunding_page.dart';
@@ -22,6 +25,15 @@ import '../../features/legal_finance/presentation/pages/expert_profile_page.dart
 import '../../features/legal_finance/presentation/pages/banking_hub_page.dart';
 import '../../features/legal_finance/presentation/pages/funding_application_page.dart';
 import '../../features/legal_finance/presentation/pages/status_tracker_page.dart';
+import '../../features/incubator/data/models/university_idea_model.dart';
+import '../../features/incubator/presentation/pages/incubator_hub_page.dart';
+import '../../features/incubator/presentation/pages/incubator_investor_requests_page.dart';
+import '../../features/incubator/presentation/pages/incubator_manage_ideas_page.dart';
+import '../../features/incubator/presentation/pages/incubator_project_details_page.dart';
+import '../../features/incubator/presentation/pages/incubator_statistics_page.dart';
+import '../../features/incubator/presentation/pages/incubator_student_details_page.dart';
+import '../../features/incubator/presentation/pages/incubator_students_page.dart';
+import '../../features/incubator/presentation/pages/university_idea_form_page.dart';
 import '../../features/shell/presentation/pages/shell_page.dart';
 
 class AppRouter {
@@ -115,6 +127,89 @@ class AppRouter {
                 parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) =>
                     InvestorDetailPage(investorId: state.pathParameters['id']!),
+              ),
+              GoRoute(
+                path: AppRoutes.universityIdeasSub,
+                name: AppRoutes.universityIdeasName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const UniversityIdeasPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.universityIdeaNdaSub,
+                name: AppRoutes.universityIdeaNdaName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  final idea = state.extra is UniversityIdea
+                      ? state.extra! as UniversityIdea
+                      : null;
+                  return UniversityIdeaNdaPage(idea: idea);
+                },
+              ),
+              GoRoute(
+                path: AppRoutes.universityIdeaChatSub,
+                name: AppRoutes.universityIdeaChatName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  final idea = state.extra is UniversityIdea
+                      ? state.extra! as UniversityIdea
+                      : null;
+                  return UniversityIdeaChatPage(idea: idea);
+                },
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.incubator,
+            name: AppRoutes.incubatorName,
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: IncubatorHubPage()),
+            routes: [
+              GoRoute(
+                path: AppRoutes.incubatorAddIdeaSub,
+                name: AppRoutes.incubatorAddIdeaName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const UniversityIdeaFormPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorManageIdeasSub,
+                name: AppRoutes.incubatorManageIdeasName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const IncubatorManageIdeasPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorProjectDetailsSub,
+                name: AppRoutes.incubatorProjectDetailsName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => IncubatorProjectDetailsPage(
+                  projectId: state.pathParameters['id']!,
+                ),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorStudentsSub,
+                name: AppRoutes.incubatorStudentsName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const IncubatorStudentsPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorStudentDetailsSub,
+                name: AppRoutes.incubatorStudentDetailsName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => IncubatorStudentDetailsPage(
+                  studentId: state.pathParameters['id']!,
+                ),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorInvestorRequestsSub,
+                name: AppRoutes.incubatorInvestorRequestsName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) =>
+                    const IncubatorInvestorRequestsPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorStatisticsSub,
+                name: AppRoutes.incubatorStatisticsName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const IncubatorStatisticsPage(),
               ),
             ],
           ),

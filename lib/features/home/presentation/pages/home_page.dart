@@ -155,6 +155,13 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: 12.h),
+                  _QuickActionCard(
+                    icon: Iconsax.teacher,
+                    title: StringsConst.incubatorHub.tr(),
+                    color: AppColors.success,
+                    onTap: () => context.go(AppRoutes.incubator),
+                  ),
                 ],
               ),
             ),
@@ -275,11 +282,11 @@ class _FeaturedProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titles = [
-      'Smart Farm Tech',
-      'Urban Living',
-      'EduPlatform',
-      'Green Energy',
-      'FinTech Hub',
+      StringsConst.featuredProject1.tr(),
+      StringsConst.featuredProject2.tr(),
+      StringsConst.featuredProject3.tr(),
+      StringsConst.featuredProject4.tr(),
+      StringsConst.featuredProject5.tr(),
     ];
     final imageKeywords = [
       'smart farm technology',

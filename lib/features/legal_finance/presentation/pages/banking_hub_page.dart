@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/common_widgets.dart';
@@ -30,7 +31,7 @@ class _BankingHubView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('banking_hub'.tr())),
+      appBar: AppBar(title: Text(StringsConst.bankingHub.tr())),
       body: BlocBuilder<LegalFinanceCubit, LegalFinanceState>(
         builder: (context, state) {
           if (state is BanksLoaded) {
@@ -54,14 +55,14 @@ class _BankingHubView extends StatelessWidget {
                       ),
                       SizedBox(height: 12.h),
                       Text(
-                        'partner_banks'.tr(),
+                        StringsConst.partnerBanks.tr(),
                         style: AppTextStyles.h3.copyWith(
                           color: AppColors.textOnPrimary,
                         ),
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        '${state.banks.length} banks available',
+                        '${state.banks.length} ${StringsConst.banksAvailable.tr()}',
                         style: AppTextStyles.bodySmall.copyWith(
                           color: AppColors.textOnPrimary.withValues(alpha: 0.8),
                         ),
@@ -101,12 +102,12 @@ class _BankingHubView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    bank.name,
+                                    bank.name.tr(),
                                     style: AppTextStyles.labelLarge,
                                   ),
                                   SizedBox(height: 2.h),
                                   Text(
-                                    'Rate: ${bank.interestRate}%',
+                                    '${StringsConst.rateLabel.tr()}: ${bank.interestRate}%',
                                     style: AppTextStyles.bodySmall.copyWith(
                                       color: AppColors.primary,
                                     ),
@@ -117,7 +118,10 @@ class _BankingHubView extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 12.h),
-                        Text(bank.description, style: AppTextStyles.bodySmall),
+                        Text(
+                          bank.description.tr(),
+                          style: AppTextStyles.bodySmall,
+                        ),
                         SizedBox(height: 12.h),
                         Wrap(
                           spacing: 6.w,
@@ -132,13 +136,16 @@ class _BankingHubView extends StatelessWidget {
                                 color: AppColors.background,
                                 borderRadius: BorderRadius.circular(8.r),
                               ),
-                              child: Text(type, style: AppTextStyles.caption),
+                              child: Text(
+                                type.tr(),
+                                style: AppTextStyles.caption,
+                              ),
                             );
                           }).toList(),
                         ),
                         SizedBox(height: 12.h),
                         SherikiButton(
-                          text: 'apply_now'.tr(),
+                          text: StringsConst.applyNow.tr(),
                           icon: Iconsax.send_1,
                           onPressed: () =>
                               context.go('/legal-finance/apply-funding'),

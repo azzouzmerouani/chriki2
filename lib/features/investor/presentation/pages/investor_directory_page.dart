@@ -44,6 +44,11 @@ class _InvestorDirectoryView extends StatelessWidget {
         title: Text(StringsConst.investorDirectory.tr()),
         actions: [
           IconButton(
+            icon: const Icon(Iconsax.lamp_on),
+            tooltip: StringsConst.universityIdeas.tr(),
+            onPressed: () => context.push(AppRoutes.universityIdeas),
+          ),
+          IconButton(
             icon: const Icon(Iconsax.chart),
             onPressed: () => context.go(AppRoutes.investorSummary),
           ),
@@ -65,6 +70,34 @@ class _InvestorDirectoryView extends StatelessWidget {
           if (state is InvestorLoaded) {
             return Column(
               children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 4.h),
+                  child: SherikiCard(
+                    margin: EdgeInsets.zero,
+                    color: AppColors.primary.withValues(alpha: 0.08),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Iconsax.teacher,
+                          color: AppColors.primary,
+                          size: 20.sp,
+                        ),
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: Text(
+                            StringsConst.universityIdeas.tr(),
+                            style: AppTextStyles.labelLarge,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () =>
+                              context.push(AppRoutes.universityIdeas),
+                          child: Text(StringsConst.viewAll.tr()),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 // Filter chips
                 SizedBox(
                   height: 50.h,
@@ -92,7 +125,7 @@ class _InvestorDirectoryView extends StatelessWidget {
                         return Padding(
                           padding: EdgeInsets.only(right: 8.w),
                           child: FilterChip(
-                            label: Text(f),
+                            label: Text(_filterLabel(f)),
                             selected: state.activeFilter == f,
                             onSelected: (_) => context
                                 .read<InvestorCubit>()
@@ -135,6 +168,25 @@ class _InvestorDirectoryView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String _filterLabel(String key) {
+    switch (key) {
+      case 'Technology':
+        return StringsConst.technology.tr();
+      case 'Agriculture':
+        return StringsConst.agriculture.tr();
+      case 'Real Estate':
+        return StringsConst.realEstate.tr();
+      case 'Healthcare':
+        return StringsConst.healthcare.tr();
+      case 'Education':
+        return StringsConst.education.tr();
+      case 'Food & Beverage':
+        return StringsConst.foodBeverage.tr();
+      default:
+        return key;
+    }
   }
 }
 

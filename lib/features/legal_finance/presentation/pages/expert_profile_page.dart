@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/common_widgets.dart';
@@ -31,7 +32,7 @@ class _ExpertProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('details'.tr())),
+      appBar: AppBar(title: Text(StringsConst.details.tr())),
       body: BlocBuilder<LegalFinanceCubit, LegalFinanceState>(
         builder: (context, state) {
           if (state is LegalExpertDetailLoaded) {
@@ -46,17 +47,17 @@ class _ExpertProfileView extends StatelessWidget {
                     radius: 48.r,
                     backgroundColor: AppColors.primary.withValues(alpha: 0.1),
                     child: Text(
-                      expert.name.substring(5, 6),
+                      expert.name.tr().substring(0, 1),
                       style: AppTextStyles.h1.copyWith(
                         color: AppColors.primary,
                       ),
                     ),
                   ),
                   SizedBox(height: 16.h),
-                  Text(expert.name, style: AppTextStyles.h3),
+                  Text(expert.name.tr(), style: AppTextStyles.h3),
                   SizedBox(height: 4.h),
                   SherikiStatusBadge(
-                    text: expert.specialization,
+                    text: expert.specialization.tr(),
                     color: AppColors.accent,
                   ),
                   SizedBox(height: 8.h),
@@ -75,7 +76,7 @@ class _ExpertProfileView extends StatelessWidget {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        '${expert.rating} (${expert.reviewCount} reviews)',
+                        '${expert.rating} (${expert.reviewCount} ${StringsConst.reviewsLabel.tr()})',
                         style: AppTextStyles.bodySmall,
                       ),
                     ],
@@ -88,9 +89,9 @@ class _ExpertProfileView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('About', style: AppTextStyles.h4),
+                        Text(StringsConst.about.tr(), style: AppTextStyles.h4),
                         SizedBox(height: 8.h),
-                        Text(expert.bio, style: AppTextStyles.bodyMedium),
+                        Text(expert.bio.tr(), style: AppTextStyles.bodyMedium),
                       ],
                     ),
                   ),
@@ -112,11 +113,11 @@ class _ExpertProfileView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Consultation Fee',
+                              StringsConst.consultationFee.tr(),
                               style: AppTextStyles.labelMedium,
                             ),
                             Text(
-                              '${expert.consultationFee.toStringAsFixed(0)} DZD per session',
+                              '${expert.consultationFee.toStringAsFixed(0)} ${StringsConst.dzdPerSession.tr()}',
                               style: AppTextStyles.h4.copyWith(
                                 color: AppColors.primary,
                               ),
@@ -130,7 +131,7 @@ class _ExpertProfileView extends StatelessWidget {
 
                   // Action Buttons
                   SherikiButton(
-                    text: 'book_consultation'.tr(),
+                    text: StringsConst.bookConsultation.tr(),
                     icon: Iconsax.calendar,
                     onPressed: () {},
                   ),
@@ -139,7 +140,7 @@ class _ExpertProfileView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: SherikiButton(
-                          text: 'chat'.tr(),
+                          text: StringsConst.chat.tr(),
                           icon: Iconsax.message,
                           isOutlined: true,
                           onPressed: () {},
@@ -148,7 +149,7 @@ class _ExpertProfileView extends StatelessWidget {
                       SizedBox(width: 12.w),
                       Expanded(
                         child: SherikiButton(
-                          text: 'video_call'.tr(),
+                          text: StringsConst.videoCall.tr(),
                           icon: Iconsax.video,
                           isOutlined: true,
                           onPressed: () {},
@@ -158,7 +159,7 @@ class _ExpertProfileView extends StatelessWidget {
                   ),
                   SizedBox(height: 12.h),
                   SherikiButton(
-                    text: 'voice_call'.tr(),
+                    text: StringsConst.voiceCall.tr(),
                     icon: Iconsax.call,
                     isOutlined: true,
                     onPressed: () {},

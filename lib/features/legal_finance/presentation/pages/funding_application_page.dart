@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/common_widgets.dart';
 import '../../logic/cubit/legal_finance_cubit.dart';
@@ -25,13 +26,13 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
   final _registrationController = TextEditingController();
 
   // Step 2
-  String _selectedBank = 'National Development Bank';
+  String _selectedBank = StringsConst.bank1Name;
   final _amountController = TextEditingController();
   final _purposeController = TextEditingController();
 
   // Step 3
   final _durationController = TextEditingController();
-  String _collateralType = 'Property';
+  String _collateralType = StringsConst.collateralProperty;
 
   @override
   void dispose() {
@@ -52,7 +53,7 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
           if (state is FundingSubmitted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Application submitted successfully!'),
+                content: Text(StringsConst.applicationSubmittedSuccess.tr()),
                 backgroundColor: AppColors.success,
               ),
             );
@@ -61,7 +62,7 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(title: Text('apply_funding'.tr())),
+            appBar: AppBar(title: Text(StringsConst.applyFunding.tr())),
             body: Form(
               key: _formKey,
               child: Stepper(
@@ -87,8 +88,8 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                         Expanded(
                           child: SherikiButton(
                             text: _currentStep == 2
-                                ? 'submit'.tr()
-                                : 'next'.tr(),
+                                ? StringsConst.submit.tr()
+                                : StringsConst.next.tr(),
                             isLoading: state is FundingSubmitting,
                             onPressed: details.onStepContinue,
                           ),
@@ -97,7 +98,7 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                           SizedBox(width: 12.w),
                           Expanded(
                             child: SherikiButton(
-                              text: 'previous'.tr(),
+                              text: StringsConst.previous.tr(),
                               isOutlined: true,
                               onPressed: details.onStepCancel,
                             ),
@@ -111,9 +112,11 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                   // Step 1: Company Info
                   Step(
                     title: Text(
-                      'step'.tr(namedArgs: {'current': '1', 'total': '3'}),
+                      StringsConst.step.tr(
+                        namedArgs: {'current': '1', 'total': '3'},
+                      ),
                     ),
-                    subtitle: const Text('Company Information'),
+                    subtitle: Text(StringsConst.companyInformation.tr()),
                     isActive: _currentStep >= 0,
                     state: _currentStep > 0
                         ? StepState.complete
@@ -121,19 +124,21 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                     content: Column(
                       children: [
                         SherikiTextField(
-                          label: 'Company Name',
-                          hint: 'Enter company name',
+                          label: StringsConst.companyName.tr(),
+                          hint: StringsConst.enterCompanyName.tr(),
                           controller: _companyNameController,
-                          validator: (v) =>
-                              v?.isEmpty ?? true ? 'Required' : null,
+                          validator: (v) => v?.isEmpty ?? true
+                              ? StringsConst.requiredField.tr()
+                              : null,
                         ),
                         SizedBox(height: 16.h),
                         SherikiTextField(
-                          label: 'Registration Number',
-                          hint: 'CR Number',
+                          label: StringsConst.registrationNumber.tr(),
+                          hint: StringsConst.crNumber.tr(),
                           controller: _registrationController,
-                          validator: (v) =>
-                              v?.isEmpty ?? true ? 'Required' : null,
+                          validator: (v) => v?.isEmpty ?? true
+                              ? StringsConst.requiredField.tr()
+                              : null,
                         ),
                       ],
                     ),
@@ -142,9 +147,11 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                   // Step 2: Funding Details
                   Step(
                     title: Text(
-                      'step'.tr(namedArgs: {'current': '2', 'total': '3'}),
+                      StringsConst.step.tr(
+                        namedArgs: {'current': '2', 'total': '3'},
+                      ),
                     ),
-                    subtitle: const Text('Funding Details'),
+                    subtitle: Text(StringsConst.fundingDetails.tr()),
                     isActive: _currentStep >= 1,
                     state: _currentStep > 1
                         ? StepState.complete
@@ -152,19 +159,19 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                     content: Column(
                       children: [
                         SherikiDropdown<String>(
-                          label: 'Select Bank',
+                          label: StringsConst.selectBank.tr(),
                           value: _selectedBank,
                           items:
                               [
-                                    'National Development Bank',
-                                    'Gulf Commercial Bank',
-                                    'Islamic Finance House',
-                                    'Innovation Capital Bank',
+                                    StringsConst.bank1Name,
+                                    StringsConst.bank2Name,
+                                    StringsConst.bank3Name,
+                                    StringsConst.bank4Name,
                                   ]
                                   .map(
                                     (b) => DropdownMenuItem(
                                       value: b,
-                                      child: Text(b),
+                                      child: Text(b.tr()),
                                     ),
                                   )
                                   .toList(),
@@ -172,22 +179,24 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                         ),
                         SizedBox(height: 16.h),
                         SherikiTextField(
-                          label: 'required_capital'.tr(),
+                          label: StringsConst.requiredCapital.tr(),
                           hint: '0 DZD',
                           controller: _amountController,
                           keyboardType: TextInputType.number,
                           prefixIcon: const Icon(Iconsax.dollar_circle),
-                          validator: (v) =>
-                              v?.isEmpty ?? true ? 'Required' : null,
+                          validator: (v) => v?.isEmpty ?? true
+                              ? StringsConst.requiredField.tr()
+                              : null,
                         ),
                         SizedBox(height: 16.h),
                         SherikiTextField(
-                          label: 'Purpose',
-                          hint: 'Describe the purpose of funding',
+                          label: StringsConst.purposeLabel.tr(),
+                          hint: StringsConst.describeFundingPurpose.tr(),
                           controller: _purposeController,
                           maxLines: 3,
-                          validator: (v) =>
-                              v?.isEmpty ?? true ? 'Required' : null,
+                          validator: (v) => v?.isEmpty ?? true
+                              ? StringsConst.requiredField.tr()
+                              : null,
                         ),
                       ],
                     ),
@@ -196,35 +205,38 @@ class _FundingApplicationPageState extends State<FundingApplicationPage> {
                   // Step 3: Terms
                   Step(
                     title: Text(
-                      'step'.tr(namedArgs: {'current': '3', 'total': '3'}),
+                      StringsConst.step.tr(
+                        namedArgs: {'current': '3', 'total': '3'},
+                      ),
                     ),
-                    subtitle: const Text('Terms & Collateral'),
+                    subtitle: Text(StringsConst.termsAndCollateral.tr()),
                     isActive: _currentStep >= 2,
                     content: Column(
                       children: [
                         SherikiTextField(
-                          label: 'Requested Duration (months)',
+                          label: StringsConst.requestedDurationMonths.tr(),
                           hint: '12',
                           controller: _durationController,
                           keyboardType: TextInputType.number,
-                          validator: (v) =>
-                              v?.isEmpty ?? true ? 'Required' : null,
+                          validator: (v) => v?.isEmpty ?? true
+                              ? StringsConst.requiredField.tr()
+                              : null,
                         ),
                         SizedBox(height: 16.h),
                         SherikiDropdown<String>(
-                          label: 'Collateral Type',
+                          label: StringsConst.collateralType.tr(),
                           value: _collateralType,
                           items:
                               [
-                                    'Property',
-                                    'Equipment',
-                                    'Cash Deposit',
-                                    'Guarantor',
+                                    StringsConst.collateralProperty,
+                                    StringsConst.collateralEquipment,
+                                    StringsConst.collateralCashDeposit,
+                                    StringsConst.collateralGuarantor,
                                   ]
                                   .map(
                                     (c) => DropdownMenuItem(
                                       value: c,
-                                      child: Text(c),
+                                      child: Text(c.tr()),
                                     ),
                                   )
                                   .toList(),

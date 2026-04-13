@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
+import '../../../../core/constants/strings_const.dart';
 import '../../data/models/legal_finance_model.dart';
 import 'legal_finance_state.dart';
 
@@ -63,46 +64,42 @@ class LegalFinanceCubit extends Cubit<LegalFinanceState> {
     return const [
       LegalExpert(
         id: 'le1',
-        name: 'Adv. Nadia Al-Salem',
-        specialization: 'Corporate Law & Contracts',
+        name: StringsConst.legalExpert1Name,
+        specialization: StringsConst.legalExpert1Specialization,
         rating: 4.9,
         reviewCount: 156,
         avatarUrl: '',
-        bio:
-            'Corporate lawyer with 20 years of experience in investment law, mergers and acquisitions, and international trade agreements.',
+        bio: StringsConst.legalExpert1Bio,
         consultationFee: 200,
       ),
       LegalExpert(
         id: 'le2',
-        name: 'Adv. Hassan Qureshi',
-        specialization: 'Real Estate Law',
+        name: StringsConst.legalExpert2Name,
+        specialization: StringsConst.legalExpert2Specialization,
         rating: 4.7,
         reviewCount: 98,
         avatarUrl: '',
-        bio:
-            'Specialist in real estate transactions, property disputes, and construction contracts across the GCC.',
+        bio: StringsConst.legalExpert2Bio,
         consultationFee: 180,
       ),
       LegalExpert(
         id: 'le3',
-        name: 'Adv. Maryam Al-Dosari',
-        specialization: 'Intellectual Property',
+        name: StringsConst.legalExpert3Name,
+        specialization: StringsConst.legalExpert3Specialization,
         rating: 4.8,
         reviewCount: 72,
         avatarUrl: '',
-        bio:
-            'IP attorney focused on patent, trademark, and copyright protection for tech startups and entrepreneurs.',
+        bio: StringsConst.legalExpert3Bio,
         consultationFee: 250,
       ),
       LegalExpert(
         id: 'le4',
-        name: 'Adv. Faisal Ibrahim',
-        specialization: 'Financial Regulations',
+        name: StringsConst.legalExpert4Name,
+        specialization: StringsConst.legalExpert4Specialization,
         rating: 4.6,
         reviewCount: 115,
         avatarUrl: '',
-        bio:
-            'Expert in banking regulations, fintech compliance, and investment fund structuring.',
+        bio: StringsConst.legalExpert4Bio,
         consultationFee: 220,
       ),
     ];
@@ -112,39 +109,51 @@ class LegalFinanceCubit extends Cubit<LegalFinanceState> {
     return const [
       Bank(
         id: 'b1',
-        name: 'National Development Bank',
+        name: StringsConst.bank1Name,
         logoUrl: '',
-        description:
-            'Government-backed development bank offering competitive SME financing.',
+        description: StringsConst.bank1Description,
         interestRate: 3.5,
-        fundingTypes: ['SME Loans', 'Project Finance', 'Working Capital'],
+        fundingTypes: [
+          StringsConst.bank1Type1,
+          StringsConst.bank1Type2,
+          StringsConst.bank1Type3,
+        ],
       ),
       Bank(
         id: 'b2',
-        name: 'Gulf Commercial Bank',
+        name: StringsConst.bank2Name,
         logoUrl: '',
-        description:
-            'Leading commercial bank with comprehensive business banking solutions.',
+        description: StringsConst.bank2Description,
         interestRate: 4.2,
-        fundingTypes: ['Business Loans', 'Trade Finance', 'Equipment Leasing'],
+        fundingTypes: [
+          StringsConst.bank2Type1,
+          StringsConst.bank2Type2,
+          StringsConst.bank2Type3,
+        ],
       ),
       Bank(
         id: 'b3',
-        name: 'Islamic Finance House',
+        name: StringsConst.bank3Name,
         logoUrl: '',
-        description:
-            'Shariah-compliant financial institution offering Murabaha and Musharakah products.',
+        description: StringsConst.bank3Description,
         interestRate: 3.8,
-        fundingTypes: ['Murabaha', 'Musharakah', 'Ijara'],
+        fundingTypes: [
+          StringsConst.bank3Type1,
+          StringsConst.bank3Type2,
+          StringsConst.bank3Type3,
+        ],
       ),
       Bank(
         id: 'b4',
-        name: 'Innovation Capital Bank',
+        name: StringsConst.bank4Name,
         logoUrl: '',
-        description:
-            'Specialized bank focused on startup and technology venture financing.',
+        description: StringsConst.bank4Description,
         interestRate: 5.0,
-        fundingTypes: ['Venture Debt', 'Startup Loans', 'Growth Capital'],
+        fundingTypes: [
+          StringsConst.bank4Type1,
+          StringsConst.bank4Type2,
+          StringsConst.bank4Type3,
+        ],
       ),
     ];
   }
@@ -153,29 +162,29 @@ class LegalFinanceCubit extends Cubit<LegalFinanceState> {
     return [
       FundingApplication(
         id: 'fa1',
-        bankName: 'National Development Bank',
+        bankName: StringsConst.bank1Name,
         amount: 500000,
-        purpose: 'Expand agricultural irrigation project',
+        purpose: StringsConst.demoFundingPurpose1,
         status: ApplicationStatus.approved,
         appliedAt: DateTime.now().subtract(const Duration(days: 30)),
-        notes: 'Approved with 3.5% interest rate, 5-year term',
+        notes: StringsConst.demoFundingNote1,
       ),
       FundingApplication(
         id: 'fa2',
-        bankName: 'Gulf Commercial Bank',
+        bankName: StringsConst.bank2Name,
         amount: 250000,
-        purpose: 'Working capital for tech startup',
+        purpose: StringsConst.demoFundingPurpose2,
         status: ApplicationStatus.pending,
         appliedAt: DateTime.now().subtract(const Duration(days: 7)),
       ),
       FundingApplication(
         id: 'fa3',
-        bankName: 'Islamic Finance House',
+        bankName: StringsConst.bank3Name,
         amount: 1000000,
-        purpose: 'Real estate development project',
+        purpose: StringsConst.demoFundingPurpose3,
         status: ApplicationStatus.rejected,
         appliedAt: DateTime.now().subtract(const Duration(days: 45)),
-        notes: 'Insufficient collateral provided',
+        notes: StringsConst.demoFundingNote2,
       ),
     ];
   }
