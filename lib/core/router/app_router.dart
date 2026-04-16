@@ -26,6 +26,8 @@ import '../../features/legal_finance/presentation/pages/banking_hub_page.dart';
 import '../../features/legal_finance/presentation/pages/funding_application_page.dart';
 import '../../features/legal_finance/presentation/pages/status_tracker_page.dart';
 import '../../features/incubator/data/models/university_idea_model.dart';
+import '../../features/incubator/presentation/pages/incubator_chat_page.dart';
+import '../../features/incubator/presentation/pages/incubator_chats_page.dart';
 import '../../features/incubator/presentation/pages/incubator_hub_page.dart';
 import '../../features/incubator/presentation/pages/incubator_investor_requests_page.dart';
 import '../../features/incubator/presentation/pages/incubator_manage_ideas_page.dart';
@@ -210,6 +212,20 @@ class AppRouter {
                 name: AppRoutes.incubatorStatisticsName,
                 parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) => const IncubatorStatisticsPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorChatsSub,
+                name: AppRoutes.incubatorChatsName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => const IncubatorChatsPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.incubatorChatSub,
+                name: AppRoutes.incubatorChatName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => IncubatorChatPage(
+                  projectId: state.pathParameters['projectId']!,
+                ),
               ),
             ],
           ),

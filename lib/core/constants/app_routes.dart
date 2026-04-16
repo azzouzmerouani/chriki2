@@ -30,6 +30,8 @@ class AppRoutes {
   static const String incubatorInvestorRequests =
       '/incubator/investor-requests';
   static const String incubatorStatistics = '/incubator/statistics';
+  static const String incubatorChats = '/incubator/chats';
+  static const String incubatorChat = '/incubator/chats/:projectId';
 
   // ── Real Estate ───────────────────────────────────────
   static const String realEstate = '/real-estate';
@@ -59,6 +61,8 @@ class AppRoutes {
   static const String incubatorStudentDetailsSub = 'students/:id';
   static const String incubatorInvestorRequestsSub = 'investor-requests';
   static const String incubatorStatisticsSub = 'statistics';
+  static const String incubatorChatsSub = 'chats';
+  static const String incubatorChatSub = 'chats/:projectId';
   static const String projectIdSub = 'project/:id';
   static const String crowdfundingSub = 'crowdfunding';
   static const String valuationSub = 'valuation';
@@ -88,6 +92,8 @@ class AppRoutes {
   static const String incubatorInvestorRequestsName =
       'incubator-investor-requests';
   static const String incubatorStatisticsName = 'incubator-statistics';
+  static const String incubatorChatsName = 'incubator-chats';
+  static const String incubatorChatName = 'incubator-chat';
   static const String realEstateName = 'real-estate';
   static const String projectDetailName = 'project-detail';
   static const String crowdfundingName = 'crowdfunding';

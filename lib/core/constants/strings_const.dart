@@ -63,6 +63,11 @@ class StringsConst {
   static const String incubator = 'incubator';
   static const String incubatorHub = 'incubator_hub';
   static const String incubatorHubSubtitle = 'incubator_hub_subtitle';
+  static const String selectAccountMode = 'select_account_mode';
+  static const String createNewAccount = 'create_new_account';
+  static const String createNewAccountSubtitle = 'create_new_account_subtitle';
+  static const String useDemoAccount = 'use_demo_account';
+  static const String useDemoAccountSubtitle = 'use_demo_account_subtitle';
   static const String incubatorRegistration = 'incubator_registration';
   static const String incubatorName = 'incubator_name';
   static const String universityName = 'university_name';
@@ -96,6 +101,14 @@ class StringsConst {
   static const String hideStudentName = 'hide_student_name';
   static const String lockDetailsUntilApproval = 'lock_details_until_approval';
   static const String incubatorReviewMessage = 'incubator_review_message';
+  static const String projectChats = 'project_chats';
+  static const String active = 'active';
+  static const String students = 'students';
+  static const String openChat = 'open_chat';
+  static const String typeMessage = 'type_message';
+  static const String chatDemoStudent = 'chat_demo_student';
+  static const String chatDemoInvestor = 'chat_demo_investor';
+  static const String chatDemoIncubator = 'chat_demo_incubator';
 
   // ── University Ideas / NDA ────────────────────────────
   static const String universityIdeas = 'university_ideas';

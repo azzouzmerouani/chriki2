@@ -12,7 +12,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/common_widgets.dart';
 import '../../data/models/university_idea_model.dart';
 
-enum _AccountType { ideaOwner, investor, realEstate, incubator }
+enum _AccountMode { createNew, useDemo }
 
 class IncubatorHubPage extends StatefulWidget {
   const IncubatorHubPage({super.key});
@@ -31,7 +31,7 @@ class _IncubatorHubPageState extends State<IncubatorHubPage> {
   final _phoneController = TextEditingController();
   final _managerController = TextEditingController();
 
-  _AccountType _selectedType = _AccountType.ideaOwner;
+  _AccountMode _accountMode = _AccountMode.createNew;
   bool _isActivated = false;
   bool _uploadedDecree = false;
   final Set<UniversityIdeaField> _selectedFields = {
@@ -72,194 +72,183 @@ class _IncubatorHubPageState extends State<IncubatorHubPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  StringsConst.accountType.tr(),
-                  style: AppTextStyles.labelLarge,
-                ),
-                SizedBox(height: 12.h),
-                Wrap(
-                  spacing: 8.w,
-                  runSpacing: 8.h,
-                  children: [
-                    _TypeChip(
-                      label: StringsConst.ideaOwner.tr(),
-                      selected: _selectedType == _AccountType.ideaOwner,
-                      onTap: () => setState(
-                        () => _selectedType = _AccountType.ideaOwner,
-                      ),
-                    ),
-                    _TypeChip(
-                      label: StringsConst.investor.tr(),
-                      selected: _selectedType == _AccountType.investor,
-                      onTap: () =>
-                          setState(() => _selectedType = _AccountType.investor),
-                    ),
-                    _TypeChip(
-                      label: StringsConst.realEstateOwner.tr(),
-                      selected: _selectedType == _AccountType.realEstate,
-                      onTap: () => setState(
-                        () => _selectedType = _AccountType.realEstate,
-                      ),
-                    ),
-                    _TypeChip(
-                      label: StringsConst.incubator.tr(),
-                      selected: _selectedType == _AccountType.incubator,
-                      onTap: () => setState(
-                        () => _selectedType = _AccountType.incubator,
-                      ),
-                    ),
-                  ],
+                  StringsConst.selectAccountMode.tr(),
+                  style: AppTextStyles.h4,
                 ),
                 SizedBox(height: 12.h),
                 Text(
                   StringsConst.incubatorHubSubtitle.tr(),
                   style: AppTextStyles.bodySmall,
                 ),
+                SizedBox(height: 16.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _ModeCard(
+                        icon: Iconsax.add_circle,
+                        title: StringsConst.createNewAccount.tr(),
+                        subtitle: StringsConst.createNewAccountSubtitle.tr(),
+                        selected: _accountMode == _AccountMode.createNew,
+                        onTap: () => setState(
+                          () => _accountMode = _AccountMode.createNew,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: _ModeCard(
+                        icon: Iconsax.flash_1,
+                        title: StringsConst.useDemoAccount.tr(),
+                        subtitle: StringsConst.useDemoAccountSubtitle.tr(),
+                        selected: _accountMode == _AccountMode.useDemo,
+                        onTap: () =>
+                            setState(() => _accountMode = _AccountMode.useDemo),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
           SizedBox(height: 16.h),
-          if (_selectedType == _AccountType.incubator)
-            _buildIncubatorFlow(context),
+          if (_accountMode == _AccountMode.createNew)
+            _buildRegistrationForm(context),
+          if (_accountMode == _AccountMode.useDemo) ...[
+            SwitchListTile.adaptive(
+              value: _isActivated,
+              title: Text(StringsConst.demoActivatedAccount.tr()),
+              secondary: const Icon(Iconsax.tick_circle),
+              onChanged: (v) => setState(() => _isActivated = v),
+            ),
+            if (_isActivated) ...[
+              SizedBox(height: 8.h),
+              _buildDashboard(context),
+            ],
+          ],
         ],
       ),
     );
   }
 
-  Widget _buildIncubatorFlow(BuildContext context) {
-    return Column(
-      children: [
-        SherikiCard(
-          margin: EdgeInsets.zero,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildRegistrationForm(BuildContext context) {
+    return SherikiCard(
+      margin: EdgeInsets.zero,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              StringsConst.incubatorRegistration.tr(),
+              style: AppTextStyles.h4,
+            ),
+            SizedBox(height: 12.h),
+            SherikiTextField(
+              label: StringsConst.incubatorName.tr(),
+              controller: _incubatorNameController,
+              validator: _required,
+            ),
+            SizedBox(height: 12.h),
+            SherikiTextField(
+              label: StringsConst.universityName.tr(),
+              controller: _universityNameController,
+              validator: _required,
+            ),
+            SizedBox(height: 12.h),
+            SherikiTextField(
+              label: StringsConst.stateName.tr(),
+              controller: _stateController,
+              validator: _required,
+            ),
+            SizedBox(height: 12.h),
+            SherikiTextField(
+              label: StringsConst.officialEmail.tr(),
+              controller: _officialEmailController,
+              keyboardType: TextInputType.emailAddress,
+              validator: _required,
+            ),
+            SizedBox(height: 12.h),
+            SherikiTextField(
+              label: StringsConst.phoneNumber.tr(),
+              controller: _phoneController,
+              keyboardType: TextInputType.phone,
+              validator: _required,
+            ),
+            SizedBox(height: 12.h),
+            SherikiTextField(
+              label: StringsConst.incubatorManagerName.tr(),
+              controller: _managerController,
+              validator: _required,
+            ),
+            SizedBox(height: 12.h),
+            Text(
+              StringsConst.specializations.tr(),
+              style: AppTextStyles.labelLarge,
+            ),
+            SizedBox(height: 8.h),
+            Wrap(
+              spacing: 8.w,
+              runSpacing: 8.h,
+              children: UniversityIdeaField.values.map((field) {
+                final selected = _selectedFields.contains(field);
+                return FilterChip(
+                  label: Text(_fieldLabel(field)),
+                  selected: selected,
+                  onSelected: (value) {
+                    setState(() {
+                      if (value) {
+                        _selectedFields.add(field);
+                      } else {
+                        _selectedFields.remove(field);
+                      }
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 16.h),
+            Row(
               children: [
-                Text(
-                  StringsConst.incubatorRegistration.tr(),
-                  style: AppTextStyles.h4,
+                Expanded(
+                  child: Text(
+                    StringsConst.uploadIncubatorDecree.tr(),
+                    style: AppTextStyles.bodySmall,
+                  ),
                 ),
-                SizedBox(height: 12.h),
-                SherikiTextField(
-                  label: StringsConst.incubatorName.tr(),
-                  controller: _incubatorNameController,
-                  validator: _required,
-                ),
-                SizedBox(height: 12.h),
-                SherikiTextField(
-                  label: StringsConst.universityName.tr(),
-                  controller: _universityNameController,
-                  validator: _required,
-                ),
-                SizedBox(height: 12.h),
-                SherikiTextField(
-                  label: StringsConst.stateName.tr(),
-                  controller: _stateController,
-                  validator: _required,
-                ),
-                SizedBox(height: 12.h),
-                SherikiTextField(
-                  label: StringsConst.officialEmail.tr(),
-                  controller: _officialEmailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: _required,
-                ),
-                SizedBox(height: 12.h),
-                SherikiTextField(
-                  label: StringsConst.phoneNumber.tr(),
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  validator: _required,
-                ),
-                SizedBox(height: 12.h),
-                SherikiTextField(
-                  label: StringsConst.incubatorManagerName.tr(),
-                  controller: _managerController,
-                  validator: _required,
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  StringsConst.specializations.tr(),
-                  style: AppTextStyles.labelLarge,
-                ),
-                SizedBox(height: 8.h),
-                Wrap(
-                  spacing: 8.w,
-                  runSpacing: 8.h,
-                  children: UniversityIdeaField.values.map((field) {
-                    final selected = _selectedFields.contains(field);
-                    return FilterChip(
-                      label: Text(_fieldLabel(field)),
-                      selected: selected,
-                      onSelected: (value) {
-                        setState(() {
-                          if (value) {
-                            _selectedFields.add(field);
-                          } else {
-                            _selectedFields.remove(field);
-                          }
-                        });
-                      },
-                    );
-                  }).toList(),
-                ),
-                SizedBox(height: 16.h),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        StringsConst.uploadIncubatorDecree.tr(),
-                        style: AppTextStyles.bodySmall,
-                      ),
-                    ),
-                    SizedBox(width: 12.w),
-                    SherikiButton(
-                      text: StringsConst.uploadDocuments.tr(),
-                      width: 120.w,
-                      icon: Iconsax.document_upload,
-                      onPressed: _pickDecree,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.h),
-                SherikiStatusBadge(
-                  text: _uploadedDecree
-                      ? StringsConst.submit.tr()
-                      : StringsConst.pendingIncubatorApproval.tr(),
-                  color: _uploadedDecree ? AppColors.success : AppColors.error,
-                ),
-                SizedBox(height: 16.h),
+                SizedBox(width: 12.w),
                 SherikiButton(
-                  text: StringsConst.submit.tr(),
-                  onPressed: _submitRegistration,
-                ),
-                SizedBox(height: 10.h),
-                Text(
-                  StringsConst.accountUnderReview.tr(),
-                  style: AppTextStyles.caption,
+                  text: StringsConst.uploadDocuments.tr(),
+                  width: 120.w,
+                  icon: Iconsax.document_upload,
+                  onPressed: _pickDecree,
                 ),
               ],
             ),
-          ),
+            SizedBox(height: 10.h),
+            SherikiStatusBadge(
+              text: _uploadedDecree
+                  ? StringsConst.submit.tr()
+                  : StringsConst.pendingIncubatorApproval.tr(),
+              color: _uploadedDecree ? AppColors.success : AppColors.error,
+            ),
+            SizedBox(height: 16.h),
+            SherikiButton(
+              text: StringsConst.submit.tr(),
+              onPressed: _submitRegistration,
+            ),
+            SizedBox(height: 10.h),
+            Text(
+              StringsConst.accountUnderReview.tr(),
+              style: AppTextStyles.caption,
+            ),
+          ],
         ),
-        SizedBox(height: 16.h),
-        SwitchListTile.adaptive(
-          value: _isActivated,
-          title: Text(StringsConst.demoActivatedAccount.tr()),
-          onChanged: (v) => setState(() => _isActivated = v),
-        ),
-        if (_isActivated) ...[SizedBox(height: 8.h), _buildDashboard(context)],
-      ],
+      ),
     );
   }
 
   Widget _buildDashboard(BuildContext context) {
     final tiles = [
-      _DashboardAction(
-        icon: Iconsax.additem,
-        label: StringsConst.addUniversityIdea.tr(),
-        onTap: () => context.push(AppRoutes.incubatorAddIdea),
-      ),
       _DashboardAction(
         icon: Iconsax.folder_2,
         label: StringsConst.manageIdeas.tr(),
@@ -281,9 +270,9 @@ class _IncubatorHubPageState extends State<IncubatorHubPage> {
         onTap: () => context.push(AppRoutes.incubatorStatistics),
       ),
       _DashboardAction(
-        icon: Iconsax.repeat,
-        label: StringsConst.convertToProject.tr(),
-        onTap: () => context.push(AppRoutes.entrepreneurNew),
+        icon: Iconsax.message_circle,
+        label: StringsConst.projectChats.tr(),
+        onTap: () => context.push(AppRoutes.incubatorChats),
       ),
     ];
 
@@ -349,24 +338,62 @@ class _IncubatorHubPageState extends State<IncubatorHubPage> {
   }
 }
 
-class _TypeChip extends StatelessWidget {
-  final String label;
+class _ModeCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
   final bool selected;
   final VoidCallback onTap;
 
-  const _TypeChip({
-    required this.label,
+  const _ModeCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
     required this.selected,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: selected,
-      onSelected: (_) => onTap(),
-      selectedColor: AppColors.primary.withValues(alpha: 0.2),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(12.w),
+        decoration: BoxDecoration(
+          color: selected
+              ? AppColors.primary.withValues(alpha: 0.1)
+              : AppColors.surface,
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color: selected ? AppColors.primary : AppColors.divider,
+            width: 2,
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: selected ? AppColors.primary : AppColors.textHint,
+              size: 32.sp,
+            ),
+            SizedBox(height: 8.h),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.labelMedium.copyWith(
+                color: selected ? AppColors.primary : AppColors.textPrimary,
+              ),
+            ),
+            SizedBox(height: 4.h),
+            Text(
+              subtitle,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.caption.copyWith(color: AppColors.textHint),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
