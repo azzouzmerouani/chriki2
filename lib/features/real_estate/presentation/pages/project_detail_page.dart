@@ -11,6 +11,7 @@ import '../../../../core/widgets/unsplash_image_widget.dart';
 import '../../data/models/real_estate_model.dart';
 import '../../logic/cubit/real_estate_cubit.dart';
 import '../../logic/cubit/real_estate_state.dart';
+import '../widgets/invest_amount_dialog.dart';
 
 class ProjectDetailPage extends StatelessWidget {
   final String projectId;
@@ -185,7 +186,7 @@ class _ProjectDetailView extends StatelessWidget {
                         SherikiButton(
                           text: StringsConst.investNow.tr(),
                           icon: Iconsax.trend_up,
-                          onPressed: () {},
+                          onPressed: () => _onInvest(context, project),
                         ),
                         SizedBox(height: 16.h),
                       ],
@@ -319,4 +320,21 @@ class _DetailStat extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _onInvest(BuildContext context, RealEstateProject project) async {
+  final cubit = context.read<RealEstateCubit>();
+  final messenger = ScaffoldMessenger.of(context);
+  final amount = await showInvestAmountDialog(context, project);
+  if (amount == null || !context.mounted) return;
+
+  cubit.invest(project.id, amount);
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(
+        StringsConst.investSuccess.tr(args: [formatDzd(context, amount)]),
+      ),
+      backgroundColor: AppColors.success,
+    ),
+  );
 }

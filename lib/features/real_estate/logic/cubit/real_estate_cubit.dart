@@ -39,6 +39,26 @@ class RealEstateCubit extends Cubit<RealEstateState> {
     emit(CrowdfundingLoaded(crowdfunding));
   }
 
+  /// Records an investment of [amount] DZD in [projectId] and refreshes
+  /// the current view with the updated funding.
+  void invest(String projectId, double amount) {
+    final index = _projects.indexWhere((p) => p.id == projectId);
+    if (index == -1) return;
+    final project = _projects[index];
+    _projects[index] = project.copyWith(
+      currentFunding: project.currentFunding + amount,
+      investorsCount: project.investorsCount + 1,
+    );
+
+    if (state is RealEstateProjectDetailLoaded) {
+      loadProjectDetail(projectId);
+    } else if (state is CrowdfundingLoaded) {
+      loadCrowdfundingProjects();
+    } else {
+      emit(RealEstateLoaded(List.of(_projects)));
+    }
+  }
+
   void loadExperts() {
     emit(ExpertsLoaded(_experts));
   }

@@ -399,4 +399,28 @@ class StringsConst {
   static const String aiAssistantDisclaimer = 'ai_assistant_disclaimer';
   static const String aiAssistantCopied = 'ai_assistant_copied';
   static const String aiAssistantInputHint = 'ai_assistant_input_hint';
+
+  // ── Invest Dialog ─────────────────────────────────────
+  static const String investDialogTitle = 'invest_dialog_title';
+  static const String investAmountHint = 'invest_amount_hint';
+  static const String investAmountTooLow = 'invest_amount_too_low';
+  static const String investAmountTooHigh = 'invest_amount_too_high';
+  static const String investMax = 'invest_max';
+  static const String investYourShare = 'invest_your_share';
+  static const String investConfirm = 'invest_confirm';
+  static const String investSuccess = 'invest_success';
+  static const String investFullyFunded = 'invest_fully_funded';
+
+  // ── Investor Chat ─────────────────────────────────────
+  static const String investorChatOnline = 'investor_chat_online';
+  static const String investorChatTyping = 'investor_chat_typing';
+  static const String investorChatToday = 'investor_chat_today';
+  static const String investorChatMsg1 = 'investor_chat_msg_1';
+  static const String investorChatMsg2 = 'investor_chat_msg_2';
+  static const String investorChatMsg3 = 'investor_chat_msg_3';
+  static const String investorChatMsg4 = 'investor_chat_msg_4';
+  static const String investorChatMsg5 = 'investor_chat_msg_5';
+  static const String investorChatAuto1 = 'investor_chat_auto_1';
+  static const String investorChatAuto2 = 'investor_chat_auto_2';
+  static const String investorChatAuto3 = 'investor_chat_auto_3';
 }

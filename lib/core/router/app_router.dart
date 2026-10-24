@@ -12,6 +12,7 @@ import '../../features/entrepreneur/presentation/pages/entrepreneur_form_page.da
 import '../../features/entrepreneur/presentation/pages/entrepreneur_list_page.dart';
 import '../../features/investor/presentation/pages/investor_directory_page.dart';
 import '../../features/investor/presentation/pages/investment_summary_page.dart';
+import '../../features/investor/presentation/pages/investor_chat_page.dart';
 import '../../features/investor/presentation/pages/investor_detail_page.dart';
 import '../../features/investor/presentation/pages/university_idea_nda_page.dart';
 import '../../features/investor/presentation/pages/university_idea_chat_page.dart';
@@ -130,13 +131,6 @@ class AppRouter {
                 builder: (context, state) => const InvestmentSummaryPage(),
               ),
               GoRoute(
-                path: AppRoutes.idSub,
-                name: AppRoutes.investorDetailName,
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) =>
-                    InvestorDetailPage(investorId: state.pathParameters['id']!),
-              ),
-              GoRoute(
                 path: AppRoutes.universityIdeasSub,
                 name: AppRoutes.universityIdeasName,
                 parentNavigatorKey: _rootNavigatorKey,
@@ -163,6 +157,24 @@ class AppRouter {
                       : null;
                   return UniversityIdeaChatPage(idea: idea);
                 },
+              ),
+              // Keep last: `:id` would otherwise match the fixed paths above.
+              GoRoute(
+                path: AppRoutes.idSub,
+                name: AppRoutes.investorDetailName,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) =>
+                    InvestorDetailPage(investorId: state.pathParameters['id']!),
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.chatSub,
+                    name: AppRoutes.investorChatName,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) => InvestorChatPage(
+                      investorId: state.pathParameters['id']!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

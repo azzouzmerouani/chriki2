@@ -42,6 +42,26 @@ class RealEstateProject extends Equatable {
 
   double get remainingFunding => totalFunding - currentFunding;
 
+  RealEstateProject copyWith({double? currentFunding, int? investorsCount}) {
+    return RealEstateProject(
+      id: id,
+      title: title,
+      description: description,
+      type: type,
+      latitude: latitude,
+      longitude: longitude,
+      address: address,
+      galleryUrls: galleryUrls,
+      totalFunding: totalFunding,
+      currentFunding: currentFunding ?? this.currentFunding,
+      investorsCount: investorsCount ?? this.investorsCount,
+      minInvestment: minInvestment,
+      isCrowdfunding: isCrowdfunding,
+      bmcData: bmcData,
+      createdAt: createdAt,
+    );
+  }
+
   factory RealEstateProject.fromJson(Map<String, dynamic> json) {
     return RealEstateProject(
       id: json['id'] as String,

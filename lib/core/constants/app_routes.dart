@@ -17,6 +17,7 @@ class AppRoutes {
   static const String investor = '/investor';
   static const String investorSummary = '/investor/summary';
   static const String investorDetail = '/investor/:id';
+  static const String investorChat = '/investor/:id/chat';
   static const String universityIdeas = '/investor/university-ideas';
   static const String universityIdeaNda = '/investor/university-ideas/nda';
   static const String universityIdeaChat = '/investor/university-ideas/chat';
@@ -52,6 +53,7 @@ class AppRoutes {
   static const String newSub = 'new';
   static const String summarySub = 'summary';
   static const String idSub = ':id';
+  static const String chatSub = 'chat';
   static const String universityIdeasSub = 'university-ideas';
   static const String universityIdeaNdaSub = 'university-ideas/nda';
   static const String universityIdeaChatSub = 'university-ideas/chat';
@@ -82,6 +84,7 @@ class AppRoutes {
   static const String investorName = 'investor';
   static const String investmentSummaryName = 'investment-summary';
   static const String investorDetailName = 'investor-detail';
+  static const String investorChatName = 'investor-chat';
   static const String universityIdeasName = 'university-ideas';
   static const String universityIdeaNdaName = 'university-idea-nda';
   static const String universityIdeaChatName = 'university-idea-chat';
@@ -109,6 +112,7 @@ class AppRoutes {
 
   // ── Helper methods for parameterized routes ───────────
   static String investorDetailPath(String id) => '/investor/$id';
+  static String investorChatPath(String id) => '/investor/$id/chat';
   static String projectDetailPath(String id) => '/real-estate/project/$id';
   static String expertProfilePath(String id) => '/legal-finance/expert/$id';
   static String incubatorProjectDetailsPath(String id) =>

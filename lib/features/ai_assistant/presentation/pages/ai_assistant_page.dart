@@ -15,6 +15,10 @@ import '../../logic/cubit/ai_assistant_state.dart';
 class AiAssistantPage extends StatefulWidget {
   const AiAssistantPage({super.key});
 
+  /// Whether the chat is currently on screen, wherever it was opened from.
+  /// The floating assistant button listens to this to hide itself.
+  static final ValueNotifier<bool> isOpen = ValueNotifier(false);
+
   @override
   State<AiAssistantPage> createState() => _AiAssistantPageState();
 }
@@ -33,11 +37,13 @@ class _AiAssistantPageState extends State<AiAssistantPage> {
   @override
   void initState() {
     super.initState();
+    AiAssistantPage.isOpen.value = true;
     _scrollToBottom();
   }
 
   @override
   void dispose() {
+    AiAssistantPage.isOpen.value = false;
     _messageController.dispose();
     _scrollController.dispose();
     super.dispose();

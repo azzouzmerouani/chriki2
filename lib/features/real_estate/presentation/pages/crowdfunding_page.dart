@@ -13,6 +13,7 @@ import '../../../../core/widgets/unsplash_image_widget.dart';
 import '../../data/models/real_estate_model.dart';
 import '../../logic/cubit/real_estate_cubit.dart';
 import '../../logic/cubit/real_estate_state.dart';
+import '../widgets/invest_amount_dialog.dart';
 
 class CrowdfundingPage extends StatelessWidget {
   const CrowdfundingPage({super.key});
@@ -176,7 +177,7 @@ class _CrowdfundingCard extends StatelessWidget {
               SherikiButton(
                 text: StringsConst.investNow.tr(),
                 width: 140.w,
-                onPressed: () {},
+                onPressed: () => _onInvest(context, project),
               ),
             ],
           ),
@@ -197,4 +198,21 @@ class _CrowdfundingCard extends StatelessWidget {
         return 'villa renovation architecture';
     }
   }
+}
+
+Future<void> _onInvest(BuildContext context, RealEstateProject project) async {
+  final cubit = context.read<RealEstateCubit>();
+  final messenger = ScaffoldMessenger.of(context);
+  final amount = await showInvestAmountDialog(context, project);
+  if (amount == null || !context.mounted) return;
+
+  cubit.invest(project.id, amount);
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(
+        StringsConst.investSuccess.tr(args: [formatDzd(context, amount)]),
+      ),
+      backgroundColor: AppColors.success,
+    ),
+  );
 }

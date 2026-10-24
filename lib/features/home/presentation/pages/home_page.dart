@@ -156,11 +156,26 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 12.h),
-                  _QuickActionCard(
-                    icon: Iconsax.teacher,
-                    title: StringsConst.incubatorHub.tr(),
-                    color: AppColors.success,
-                    onTap: () => context.go(AppRoutes.incubator),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _QuickActionCard(
+                          icon: Iconsax.teacher,
+                          title: StringsConst.incubatorHub.tr(),
+                          color: AppColors.success,
+                          onTap: () => context.go(AppRoutes.incubator),
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      Expanded(
+                        child: _QuickActionCard(
+                          icon: Iconsax.message_programming,
+                          title: StringsConst.aiAssistantTitle.tr(),
+                          color: AppColors.primaryLight,
+                          onTap: () => context.push(AppRoutes.aiAssistant),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

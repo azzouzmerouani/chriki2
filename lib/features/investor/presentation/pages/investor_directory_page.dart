@@ -307,7 +307,8 @@ class _InvestorCard extends StatelessWidget {
                 width: 100.w,
                 child: SherikiButton(
                   text: StringsConst.sendMessage.tr(),
-                  onPressed: () {},
+                  onPressed: () =>
+                      context.push(AppRoutes.investorChatPath(investor.id)),
                   backgroundColor: AppColors.accent,
                 ),
               ),

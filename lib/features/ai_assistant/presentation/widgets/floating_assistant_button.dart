@@ -7,6 +7,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../core/constants/app_routes.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../pages/ai_assistant_page.dart';
 
 /// Wraps the whole app and draws a draggable AI assistant bubble on top
 /// of every screen.
@@ -34,7 +35,6 @@ class _FloatingAssistantButtonState extends State<FloatingAssistantButton>
   /// Top-left position of the bubble; `null` until first layout.
   Offset? _position;
   bool _isDragging = false;
-  bool _isChatOpen = false;
 
   double get _size => 58.w;
   double get _edgeMargin => 12.w;
@@ -46,11 +46,13 @@ class _FloatingAssistantButtonState extends State<FloatingAssistantButton>
   void initState() {
     super.initState();
     AppRouter.router.routerDelegate.addListener(_onRouteChanged);
+    AiAssistantPage.isOpen.addListener(_onRouteChanged);
   }
 
   @override
   void dispose() {
     AppRouter.router.routerDelegate.removeListener(_onRouteChanged);
+    AiAssistantPage.isOpen.removeListener(_onRouteChanged);
     _floatController.dispose();
     super.dispose();
   }
@@ -64,10 +66,9 @@ class _FloatingAssistantButtonState extends State<FloatingAssistantButton>
     return config.uri.path == AppRoutes.onboarding;
   }
 
-  Future<void> _openChat() async {
-    setState(() => _isChatOpen = true);
-    await AppRouter.router.push(AppRoutes.aiAssistant);
-    if (mounted) setState(() => _isChatOpen = false);
+  void _openChat() {
+    if (AiAssistantPage.isOpen.value) return;
+    AppRouter.router.push(AppRoutes.aiAssistant);
   }
 
   Offset _clamp(Offset position, Size screen, EdgeInsets padding) {
@@ -87,7 +88,7 @@ class _FloatingAssistantButtonState extends State<FloatingAssistantButton>
     final screen = media.size;
     final padding = media.padding;
 
-    final hidden = _isChatOpen || _isOnOnboarding;
+    final hidden = AiAssistantPage.isOpen.value || _isOnOnboarding;
     final position = _clamp(
       _position ??
           Offset(screen.width - _size - _edgeMargin, screen.height * 0.65),

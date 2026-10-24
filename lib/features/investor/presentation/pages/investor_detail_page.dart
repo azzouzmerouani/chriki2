@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../core/constants/app_routes.dart';
 import '../../../../core/constants/strings_const.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -184,7 +186,9 @@ class _InvestorDetailView extends StatelessWidget {
                         child: SherikiButton(
                           text: StringsConst.sendMessage.tr(),
                           icon: Iconsax.message,
-                          onPressed: () {},
+                          onPressed: () => context.push(
+                            AppRoutes.investorChatPath(investor.id),
+                          ),
                         ),
                       ),
                       SizedBox(width: 12.w),
@@ -200,6 +204,12 @@ class _InvestorDetailView extends StatelessWidget {
                   ),
                 ],
               ),
+            );
+          }
+          if (state is InvestorError) {
+            return SherikiEmptyState(
+              message: state.message.tr(),
+              icon: Iconsax.user_search,
             );
           }
           return const Center(child: CircularProgressIndicator());

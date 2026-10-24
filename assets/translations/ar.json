@@ -353,5 +353,27 @@
   "ai_assistant_new_chat": "محادثة جديدة",
   "ai_assistant_disclaimer": "إجابات الذكاء الاصطناعي إرشادية. استشر خبيراً قبل اتخاذ أي قرار.",
   "ai_assistant_copied": "تم نسخ الرسالة",
-  "ai_assistant_input_hint": "اطرح سؤالك..."
+  "ai_assistant_input_hint": "اطرح سؤالك...",
+
+  "invest_dialog_title": "الاستثمار في المشروع",
+  "invest_amount_hint": "أدخل المبلغ",
+  "invest_amount_too_low": "الحد الأدنى للمبلغ هو {}",
+  "invest_amount_too_high": "الحد الأقصى المتاح هو {}",
+  "invest_max": "الحد الأقصى",
+  "invest_your_share": "حصتك التقديرية من المشروع",
+  "invest_confirm": "تأكيد",
+  "invest_success": "تم تسجيل استثمارك بقيمة {}",
+  "invest_fully_funded": "هذا المشروع ممول بالكامل",
+
+  "investor_chat_online": "متصل الآن",
+  "investor_chat_typing": "يكتب الآن...",
+  "investor_chat_today": "اليوم",
+  "investor_chat_msg_1": "مرحباً! شكراً لتواصلك مع {}. كيف يمكننا مساعدتك؟",
+  "investor_chat_msg_2": "مرحباً، أعمل على مشروع في قطاع {} وأبحث عن مستثمر.",
+  "investor_chat_msg_3": "هذا قطاع يهمنا. في أي مرحلة وصل المشروع وما المبلغ الذي تبحث عنه؟",
+  "investor_chat_msg_4": "لدينا نموذج أولي جاهز ونبحث عن 5 ملايين دج لإطلاق الإنتاج.",
+  "investor_chat_msg_5": "ممتاز. أرسل لنا خطة العمل والتوقعات المالية، وسننظم مكالمة هذا الأسبوع.",
+  "investor_chat_auto_1": "شكراً على هذه المعلومات، سيدرسها فريقنا بعناية.",
+  "investor_chat_auto_2": "هل يمكننا تحديد اجتماع عبر الإنترنت يوم الخميس على الساعة 10 صباحاً؟",
+  "investor_chat_auto_3": "خبر سار: انتقل ملفك إلى مرحلة التقييم. سنعود إليك قريباً."
 }

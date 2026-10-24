@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/constants/strings_const.dart';
 import '../../data/models/investor_model.dart';
 import 'investor_state.dart';
 
@@ -33,7 +35,12 @@ class InvestorCubit extends Cubit<InvestorState> {
   }
 
   void loadInvestorDetail(String investorId) {
-    final investor = _allInvestors.firstWhere((i) => i.id == investorId);
+    final matches = _allInvestors.where((i) => i.id == investorId);
+    if (matches.isEmpty) {
+      emit(const InvestorError(StringsConst.noData));
+      return;
+    }
+    final investor = matches.first;
     final records = _records.where((r) => r.investorId == investorId).toList();
     emit(InvestorDetailLoaded(investor, records));
   }
