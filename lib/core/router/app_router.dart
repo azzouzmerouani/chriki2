@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/app_routes.dart';
+import '../../features/ai_assistant/presentation/pages/ai_assistant_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/onboarding/logic/cubit/onboarding_cubit.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
@@ -86,6 +87,11 @@ class AppRouter {
           create: (_) => OnboardingCubit()..checkOnboardingStatus(),
           child: const OnboardingPage(),
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.aiAssistant,
+        name: AppRoutes.aiAssistantName,
+        builder: (context, state) => const AiAssistantPage(),
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,

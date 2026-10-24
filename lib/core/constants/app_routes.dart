@@ -8,6 +8,7 @@ class AppRoutes {
   // ── Root ──────────────────────────────────────────────
   static const String home = '/';
   static const String onboarding = '/onboarding';
+  static const String aiAssistant = '/assistant';
   // ── Entrepreneur ──────────────────────────────────────
   static const String entrepreneur = '/entrepreneur';
   static const String entrepreneurNew = '/entrepreneur/new';
@@ -74,6 +75,7 @@ class AppRoutes {
 
   // ── Route names ───────────────────────────────────────
   static const String onboardingName = 'onboarding';
+  static const String aiAssistantName = 'ai-assistant';
   static const String homeName = 'home';
   static const String entrepreneurName = 'entrepreneur';
   static const String entrepreneurNewName = 'entrepreneur-new';

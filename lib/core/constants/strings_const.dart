@@ -381,4 +381,22 @@ class StringsConst {
   static const String smartAlertProject3 = 'smart_alert_project_3';
   static const String smartAlertProject4 = 'smart_alert_project_4';
   static const String smartAlertProject5 = 'smart_alert_project_5';
+
+  // ── AI Assistant ──────────────────────────────────────
+  static const String aiAssistantTitle = 'ai_assistant_title';
+  static const String aiAssistantSubtitle = 'ai_assistant_subtitle';
+  static const String aiAssistantWelcomeTitle = 'ai_assistant_welcome_title';
+  static const String aiAssistantWelcomeMessage =
+      'ai_assistant_welcome_message';
+  static const String aiAssistantSuggestions = 'ai_assistant_suggestions';
+  static const String aiAssistantSuggestion1 = 'ai_assistant_suggestion_1';
+  static const String aiAssistantSuggestion2 = 'ai_assistant_suggestion_2';
+  static const String aiAssistantSuggestion3 = 'ai_assistant_suggestion_3';
+  static const String aiAssistantSuggestion4 = 'ai_assistant_suggestion_4';
+  static const String aiAssistantThinking = 'ai_assistant_thinking';
+  static const String aiAssistantError = 'ai_assistant_error';
+  static const String aiAssistantNewChat = 'ai_assistant_new_chat';
+  static const String aiAssistantDisclaimer = 'ai_assistant_disclaimer';
+  static const String aiAssistantCopied = 'ai_assistant_copied';
+  static const String aiAssistantInputHint = 'ai_assistant_input_hint';
 }

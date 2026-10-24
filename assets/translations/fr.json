@@ -337,5 +337,21 @@
   "smart_alert_project_2": "Flotte de livraison verte",
   "smart_alert_project_3": "Plateforme EduConnect",
   "smart_alert_project_4": "Résidence Al Murjan",
-  "smart_alert_project_5": "Application HealthTrack"
+  "smart_alert_project_5": "Application HealthTrack",
+
+  "ai_assistant_title": "Assistant Cheriki IA",
+  "ai_assistant_subtitle": "Conseiller investissement & immobilier",
+  "ai_assistant_welcome_title": "Bonjour ! Comment puis-je vous aider ?",
+  "ai_assistant_welcome_message": "Posez-moi vos questions sur l'investissement, l'immobilier, le financement participatif, les partenariats ou l'utilisation de l'application.",
+  "ai_assistant_suggestions": "Suggestions",
+  "ai_assistant_suggestion_1": "Comment calculer le rendement d'un investissement immobilier ?",
+  "ai_assistant_suggestion_2": "Quels sont les risques du financement participatif immobilier ?",
+  "ai_assistant_suggestion_3": "Comment présenter mon projet à un investisseur ?",
+  "ai_assistant_suggestion_4": "Quelles options de financement islamique existent en Algérie ?",
+  "ai_assistant_thinking": "L'assistant réfléchit...",
+  "ai_assistant_error": "Impossible d'obtenir une réponse. Vérifiez votre connexion et réessayez.",
+  "ai_assistant_new_chat": "Nouvelle conversation",
+  "ai_assistant_disclaimer": "Les réponses de l'IA sont indicatives. Consultez un expert avant toute décision.",
+  "ai_assistant_copied": "Message copié",
+  "ai_assistant_input_hint": "Posez votre question..."
 }

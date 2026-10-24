@@ -337,5 +337,21 @@
   "smart_alert_project_2": "أسطول توصيل أخضر",
   "smart_alert_project_3": "منصة EduConnect",
   "smart_alert_project_4": "إقامة المرجان",
-  "smart_alert_project_5": "تطبيق HealthTrack"
+  "smart_alert_project_5": "تطبيق HealthTrack",
+
+  "ai_assistant_title": "مساعد شريكي الذكي",
+  "ai_assistant_subtitle": "مستشار الاستثمار والعقارات",
+  "ai_assistant_welcome_title": "مرحباً! كيف يمكنني مساعدتك؟",
+  "ai_assistant_welcome_message": "اسألني عن الاستثمار، العقارات، التمويل الجماعي، الشراكات أو كيفية استخدام التطبيق.",
+  "ai_assistant_suggestions": "اقتراحات",
+  "ai_assistant_suggestion_1": "كيف أحسب عائد الاستثمار العقاري؟",
+  "ai_assistant_suggestion_2": "ما هي مخاطر التمويل الجماعي العقاري؟",
+  "ai_assistant_suggestion_3": "كيف أعرض مشروعي على مستثمر؟",
+  "ai_assistant_suggestion_4": "ما هي خيارات التمويل الإسلامي المتوفرة في الجزائر؟",
+  "ai_assistant_thinking": "المساعد يفكر...",
+  "ai_assistant_error": "تعذر الحصول على رد. تحقق من اتصالك وحاول مرة أخرى.",
+  "ai_assistant_new_chat": "محادثة جديدة",
+  "ai_assistant_disclaimer": "إجابات الذكاء الاصطناعي إرشادية. استشر خبيراً قبل اتخاذ أي قرار.",
+  "ai_assistant_copied": "تم نسخ الرسالة",
+  "ai_assistant_input_hint": "اطرح سؤالك..."
 }
